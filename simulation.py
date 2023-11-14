@@ -39,16 +39,14 @@ def van_der_pol_cardiac_arrest(x, t, mu, arrest_time):
         dxdt = [x2, mu*(1 - x1**2)*x2 - x1]
     return dxdt
 
-def van_der_pol_defibrillator_regulated(x, t, mu, arrest_time, defib_time, defib_strength, recovery_time):
+def van_der_pol_defibrillator(x, t, mu, arrest_time, defib_time, defib_strength):
     x1, x2 = x
     if t > arrest_time:
-        if t > defib_time and t < defib_time + recovery_time:
-            # Simulate defibrillation and subsequent recovery period
-            dxdt = [defib_strength * np.sin(5 * (t - defib_time)), 0]
-        else:
-            # After recovery, return to normal Van der Pol dynamics
-            dxdt = [x2, mu*(1 - x1**2)*x2 - x1]
+        # Simulate cardiac arrest
+        dxdt = [0, 0]
+        if t > defib_time:
+            # Simulate defibrillation
+            dxdt = [defib_strength, 0]
     else:
-        # Normal Van der Pol dynamics before cardiac arrest
         dxdt = [x2, mu*(1 - x1**2)*x2 - x1]
     return dxdt

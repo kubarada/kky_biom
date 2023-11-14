@@ -9,6 +9,8 @@ t = np.linspace(0, 50, 500)
 x0 = [1.0, 0.0]
 arrhythmia_factor = 0.5
 arrest_time = 25
+defib_time = 30
+defib_strength = 2
 
 sol_no_stim = odeint(simulation.van_der_pol_oscillator_no_stim, x0, t, args=(mu,))
 
@@ -48,4 +50,17 @@ plt.xlabel('t [s]')
 plt.ylabel(r'$x_1(t)$')
 plt.grid()
 plt.title('Srdeční zástava')
+plt.show()
+
+# Solve ODE with cardiac arrest and defibrillator
+sol_defibrillator = odeint(simulation.van_der_pol_defibrillator, x0, t, args=(mu, arrest_time, defib_time, defib_strength))
+
+# Plot results with cardiac arrest and defibrillator
+plt.plot(t, sol_defibrillator[:, 0])
+plt.xlabel('t [s]')
+plt.ylabel(r'$x_1(t)$')
+plt.grid()
+plt.xlim([0, 35])
+plt.ylim([-2, 10])
+plt.title('Defibrilace po srdeční zástavě')
 plt.show()
