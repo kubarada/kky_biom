@@ -5,7 +5,7 @@ pip install scipy<br />
 pip install matplotlib<br />
 pip install numpy<br />
 <br />
-... aleternativně lze instalovat i s využitím condy následovně <br />
+... alternativně lze instalovat i s využitím condy následovně <br />
 <br />
 conda create --name env_name python=3.8<br />
 conda install -c anaconda scipy<br />
